@@ -64,4 +64,4 @@
 
 - belongs_to :user
 - belongs_to :product
-- belongs_to :ship_address
+- has_one :ship_address
