@@ -1,24 +1,70 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
 
-Things you may want to cover:
+| Column           | Type   | Option      |
+| ---------------- | ------ | ----------- |
+| nickname         | string | null: false |
+| email            | string | null: false |
+| password         | string | null: false |
+| first_name       | string | null: false |
+| last_name        | string | null: false |
+| first_name_kana  | string | null: false |
+| last_name_kana   | string | null: false |
+| barth_date       | date   | null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :products
+- has_many :buyer
+- has_many :ship_address
 
-* Configuration
+## productsテーブル
 
-* Database creation
+| Column      | Type       | Option      |
+| ----------- | ---------- | ----------- |
+| name        | string     | null: false |
+| category    | string     | null: false |
+| status      | string     | null: false |
+| ship_from   | string     | null: false |
+| ship_day    | string     | null: false |
+| description | text       | null: false |
+| ship_cost   | integer    | null: false |
+| price       | integer    | null: false |
+| user_id     | references |             |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- belongs_to :user
+- has_one :ship_address
+- has_one :buyer
 
-* Services (job queues, cache servers, search engines, etc.)
+## ship_addressテーブル
 
-* Deployment instructions
+| Column        | Type       | Option      |
+| ------------- | ---------- | ----------- |
+| post_code     | integer    | null: false |
+| prefecture    | string     | null: false |
+| municipality  | string     | null: false |
+| building_name | string     |             |
+| address       | text       | null: false |
+| phone_number  | string     | null: false |
 
-* ...
+### Association
+
+- belongs_to :user
+- belongs_to :product
+- belongs_to :buyer
+
+## buyerテーブル
+
+| Column     | Type       | Option      |
+| ---------- | ---------- | ----------- |
+| user_id    | references |             |
+| product_id | references |             |
+
+### Association
+
+- belongs_to :user
+- belongs_to :product
+- belongs_to :buyer
