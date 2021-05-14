@@ -11,7 +11,7 @@
 | last_name         | string | null: false              |
 | first_name_kana   | string | null: false              |
 | last_name_kana    | string | null: false              |
-| barth_date        | date   | null: false              |
+| birth_date        | date   | null: false              |
 
 ### Association
 
@@ -20,17 +20,17 @@
 
 ## productsテーブル
 
-| Column      | Type       | Option           |
-| ----------- | ---------- | ---------------- |
-| name        | string     | null: false      |
-| description | text       | null: false      |
-| category_id | integer    | null: false      |
-| stat_id     | integer    | null: false      |
-| from_id     | integer    | null: false      |
-| day_id      | integer    | null: false      |
-| cost_id     | integer    | null: false      |
-| price       | integer    | null: false      |
-| user        | references | foreign_key: true|
+| Column               | Type       | Option           |
+| -------------------- | ---------- | ---------------- |
+| name                 | string     | null: false      |
+| description          | text       | null: false      |
+| category_id          | integer    | null: false      |
+| stat_id              | integer    | null: false      |
+| from_id              | integer    | null: false      |
+| shipping_day_id      | integer    | null: false      |
+| cost_id              | integer    | null: false      |
+| price                | integer    | null: false      |
+| user                 | references | foreign_key: true|
 
 ### Association
 
