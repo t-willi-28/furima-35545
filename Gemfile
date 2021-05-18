@@ -57,3 +57,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
 gem 'devise'
+gem 'rspec-rails', '~> 4.0.0'
