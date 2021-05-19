@@ -3,15 +3,19 @@ class Product < ApplicationRecord
   has_one_attached :image
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :from
+  belongs_to :category
+  belongs_to :cost
+  belongs_to :shipping_day
+  belongs_to :stat
 
   with_options presence: true
     validates :name
     validates :description
-    validates :category_id
-    validates :stat_id
+    validates :category_id, numericality: { other_than: 1 }
+    validates :stat_id, numericality: { other_than: 1 }
     validates :from_id, numericality: { other_than: 1 }
-    validates :shipping_day_id
-    validates :cost_id
+    validates :shipping_day_id, { other_than: 1 }
+    validates :cost_id, { other_than: 1 }
     validates :price
   end
 end
