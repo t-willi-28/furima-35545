@@ -35,31 +35,31 @@ RSpec.describe Product, type: :model do
       it 'カテゴリーを選択しないと出品できない' do
         @product.category_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Category must be other than 1")
+        expect(@product.errors.full_messages).to include('Category must be other than 1')
       end
 
       it '商品の状態を選択しないと出品できない' do
         @product.stat_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Stat must be other than 1")
+        expect(@product.errors.full_messages).to include('Stat must be other than 1')
       end
 
       it '発送元を選択しないと出品できない' do
         @product.from_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("From must be other than 1")
+        expect(@product.errors.full_messages).to include('From must be other than 1')
       end
 
       it '発送までの日数を選択しないと出品できない' do
         @product.shipping_day_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Shipping day must be other than 1")
+        expect(@product.errors.full_messages).to include('Shipping day must be other than 1')
       end
 
       it '配送料の負担を選択しないと出品できない' do
         @product.cost_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Cost must be other than 1")
+        expect(@product.errors.full_messages).to include('Cost must be other than 1')
       end
 
       it '商品の価格がないと出品できない' do
@@ -71,19 +71,19 @@ RSpec.describe Product, type: :model do
       it '商品の価格が半角数字でないと出品できない' do
         @product.price = 'aaaaa'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price is not a number")
+        expect(@product.errors.full_messages).to include('Price is not a number')
       end
 
       it '商品の価格が300円未満だと出品できない' do
         @product.price = 10
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price must be greater than or equal to 300")
+        expect(@product.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
 
       it '商品の価格が10000000円以上だと出品できない' do
-        @product.price = 10000000
+        @product.price = 10_000_000
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price must be less than or equal to 9999999")
+        expect(@product.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
     end
   end
