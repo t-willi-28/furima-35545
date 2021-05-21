@@ -12,11 +12,13 @@ class Product < ApplicationRecord
     validates :image
     validates :name
     validates :description
-    validates :category_id, numericality: { other_than: 1 }
-    validates :stat_id, numericality: { other_than: 1 }
-    validates :from_id, numericality: { other_than: 1 }
-    validates :shipping_day_id, numericality: { other_than: 1 }
-    validates :cost_id, numericality: { other_than: 1 }
     validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+    with_options numericality: { other_than: 1 } do
+      validates :category_id
+      validates :stat_id
+      validates :from_id
+      validates :shipping_day_id
+      validates :cost_id
+    end
   end
 end
