@@ -16,6 +16,6 @@ class Product < ApplicationRecord
     validates :from_id, numericality: { other_than: 1 }
     validates :shipping_day_id, numericality: { other_than: 1 }
     validates :cost_id, numericality: { other_than: 1 }
-    validates :price
+    validates :price,numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
   end
 end
