@@ -1,5 +1,8 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_params, only: [:edit, :update]
+  before_action :move_to_index, only: [:edit, :update]
+
   def index
     @product = Product.all.order('created_at DESC')
   end
@@ -21,10 +24,30 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+  def edit
+  end
+
+  def update
+    if @product.update(product_params)
+      redirect_to product_path
+    else
+      render :edit
+    end
+  end
+
   private
 
   def product_params
-    params.permit(:name, :description, :category_id, :stat_id, :from_id, :shipping_day_id, :cost_id, :price,
-                  :image).merge(user_id: current_user.id)
+    params.require(:product).permit(:name, :description, :category_id, :stat_id, :from_id, :shipping_day_id, :cost_id, :price,
+                                    :image).merge(user_id: current_user.id)
   end
+
+  def set_params
+    @product = Product.find(params[:id])
+  end
+
+  def move_to_index
+    redirect_to root_path unless user_signed_in? && current_user.id == @product.user_id
+  end
+
 end
