@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_params, only: [:edit, :update]
   before_action :move_to_index, only: [:edit]
 
   def index
@@ -24,11 +25,9 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = Product.find(params[:id])
   end
 
   def update
-    @product = Product.find(params[:id])
     if @product.update(product_params)
       redirect_to product_path
     else
@@ -43,8 +42,12 @@ class ProductsController < ApplicationController
                                     :image).merge(user_id: current_user.id)
   end
 
-  def move_to_index
+  def set_params
     @product = Product.find(params[:id])
+  end
+
+  def move_to_index
     redirect_to root_path unless user_signed_in? && current_user.id == @product.user_id
   end
+
 end
