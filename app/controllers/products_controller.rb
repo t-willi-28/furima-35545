@@ -40,13 +40,11 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:name, :description, :category_id, :stat_id, :from_id, :shipping_day_id, :cost_id, :price,
-                  :image).merge(user_id: current_user.id)
+                                    :image).merge(user_id: current_user.id)
   end
 
   def move_to_index
     @product = Product.find(params[:id])
-    unless user_signed_in? && current_user.id == @product.user_id
-      redirect_to root_path
-    end
+    redirect_to root_path unless user_signed_in? && current_user.id == @product.user_id
   end
 end
