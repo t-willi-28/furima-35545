@@ -35,6 +35,12 @@ class ProductsController < ApplicationController
     end
   end
 
+  def destroy
+    product = Product.find(params[:id])
+    product.destroy
+    redirect_to root_path
+  end
+
   private
 
   def product_params
@@ -49,5 +55,4 @@ class ProductsController < ApplicationController
   def move_to_index
     redirect_to root_path unless user_signed_in? && current_user.id == @product.user_id
   end
-
 end
