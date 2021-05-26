@@ -1,6 +1,6 @@
 class BuyerAddress
   include ActiveModel::Model
-  attr_accessor :user, :product, :post_code, :from_id, :municipality, :building_name, :address, :phone_number
+  attr_accessor :user_id, :product_id, :post_code, :from_id, :municipality, :building_name, :address, :phone_number
 
   with_options presence: true do
     validates :post_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/ }
@@ -8,5 +8,10 @@ class BuyerAddress
     validates :municipality
     validates :address
     validates :phone_number, format: { with: /\A\d{10,11}\z/ }
+  end
+
+  def save
+    buyer = Buyer.create(user_id: user_id, product_id: product_id)
+    Address.create(post_code: post_code, from_id: from_id, municipality: municipality, building_name: building_name, address: address, phone_number: phone_number, buyer_id: buyer.id)
   end
 end
