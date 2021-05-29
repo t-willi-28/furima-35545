@@ -41,6 +41,6 @@ class BuyersController < ApplicationController
 
   def move_to_index
     @product = Product.find(params[:product_id])
-    redirect_to root_path if current_user.id == @product.user_id
+    redirect_to root_path if current_user.id == @product.user_id || @product.buyer.present?
   end
 end
