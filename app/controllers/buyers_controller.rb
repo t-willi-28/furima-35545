@@ -1,14 +1,13 @@
 class BuyersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_params, only: [:index, :create]
   before_action :move_to_index, only: [:index, :create]
 
   def index
-    @product = Product.find(params[:product_id])
     @buyer_address = BuyerAddress.new
   end
 
   def create
-    @product = Product.find(params[:product_id])
     @buyer_address = BuyerAddress.new(buyer_params)
     if @buyer_address.valid?
       pay_product
@@ -20,6 +19,10 @@ class BuyersController < ApplicationController
   end
 
   private
+
+  def set_params
+    @product = Product.find(params[:product_id])
+  end
 
   def buyer_params
     params.require(:buyer_address).permit(:post_code, :from_id, :municipality, :address, :building_name, :phone_number).merge(
