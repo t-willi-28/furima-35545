@@ -1,4 +1,7 @@
 class BuyersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :move_to_index, only: [:index, :create]
+
 
   def index
     @product = Product.find(params[:product_id])
@@ -30,5 +33,10 @@ class BuyersController < ApplicationController
       card: buyer_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def move_to_index
+    @product= Product.find(params[:product_id])
+    redirect_to root_path if current_user.id == @product.user_id
   end
 end
