@@ -32,7 +32,7 @@ RSpec.describe BuyerAddress, type: :model do
       it '郵便番号が半角のハイフンを含んだ正しい形でないと購入できない' do
         @buyer_address.post_code = '1234567'
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include("Post code is invalid")
+        expect(@buyer_address.errors.full_messages).to include('Post code is invalid')
       end
 
       it '都道府県を選択しないと購入できない' do
@@ -62,13 +62,13 @@ RSpec.describe BuyerAddress, type: :model do
       it '電話番号が数値意外だと購入できない' do
         @buyer_address.phone_number = 'aaaaaaaaaaa'
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include("Phone number is invalid")
+        expect(@buyer_address.errors.full_messages).to include('Phone number is invalid')
       end
 
       it '電話番号が12桁以上だと購入できない' do
         @buyer_address.phone_number = '090123456789'
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include("Phone number is invalid")
+        expect(@buyer_address.errors.full_messages).to include('Phone number is invalid')
       end
 
       it 'tokenが空だと購入できない' do
