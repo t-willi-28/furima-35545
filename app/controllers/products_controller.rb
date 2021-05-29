@@ -52,6 +52,6 @@ class ProductsController < ApplicationController
   end
 
   def move_to_index
-    redirect_to root_path unless current_user.id == @product.user_id || @product.buyer.present?
+    redirect_to root_path if current_user.id != @product.user_id || @product.buyer.present?
   end
 end
